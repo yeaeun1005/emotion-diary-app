@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>감정 다이어리</title>
+<title>마음 바다 탐험대</title>
 <link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css" rel="stylesheet"/>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-database-compat.js"></script>
@@ -270,8 +270,8 @@ function CircumplexChart({ entries, hovIdx, onHover }) {
     c.font = "600 10px 'Pretendard',system-ui"; c.fillStyle = "rgba(0,0,0,0.25)"; c.textAlign = "center";
     c.fillText("활기·흥분", cx + rad * 0.55, cy - rad * 0.9); c.fillText("분노·불안", cx - rad * 0.55, cy - rad * 0.9); c.fillText("슬픔·피로", cx - rad * 0.55, cy + rad * 0.95); c.fillText("평온·만족", cx + rad * 0.55, cy + rad * 0.95);
     c.fillStyle = "rgba(0,0,0,0.35)"; c.font = "600 11px 'Pretendard',system-ui"; c.fillText("긍정 →", cx + rad - 28, cy + 18); c.fillText("← 부정", cx - rad + 28, cy + 18);
-    c.save(); c.translate(cx - 18, cy - rad + 28); c.rotate(-Math.PI / 2); c.fillText("고각성 ↑", 0, 0); c.restore();
-    c.save(); c.translate(cx - 18, cy + rad - 28); c.rotate(-Math.PI / 2); c.fillText("↓ 저각성", 0, 0); c.restore();
+    c.save(); c.translate(cx - 18, cy - rad + 28); c.rotate(-Math.PI / 2); c.fillText("에너지 높음", 0, 0); c.restore();
+    c.save(); c.translate(cx - 18, cy + rad - 28); c.rotate(-Math.PI / 2); c.fillText("에너지 낮음", 0, 0); c.restore();
     c.globalAlpha = 0.18; for (const em of EMOTIONS_28) { const vs = ((em.val - 1) / 8) * 2 - 1, as = ((em.aro - 1) / 8) * 2 - 1; c.beginPath(); c.arc(cx + vs * rad, cy - as * rad, 2.5, 0, Math.PI * 2); c.fillStyle = QC[em.q]; c.fill(); } c.globalAlpha = 1;
     entries.forEach((en, ei) => {
       const isH = hovIdx === ei, dim = hovIdx !== null && !isH;
@@ -1618,12 +1618,12 @@ function App() {
       
       <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", minHeight: "100vh", padding: 24 }}>
         <h1 style={{ fontSize: 36, fontWeight: 800, margin: 0, background: "linear-gradient(135deg,#6366f1,#8b5cf6)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>감정 다이어리</h1>
-        <p style={{ fontSize: 14, color: "#64748b", margin: "8px 0 40px", textAlign: "center", lineHeight: 1.6 }}>러셀의 원형 그래프 28개 + 130개의 감정을 분석하여<br />매일의 나의 감정을 분석합니다.</p>
+        <p style={{ fontSize: 14, color: "#64748b", margin: "8px 0 40px", textAlign: "center", lineHeight: 1.6 }}>나의 마음 속에는 어떤 감정들이 헤엄치고 있을까요?</p>
         <div style={{ display: "flex", gap: 20, maxWidth: 720, width: "100%", flexWrap: "wrap" }}>
           {/* Login */}
           <div style={{ ...crd, padding: 24, flex: "1 1 320px" }}>
             <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 4px" }}>🔑 로그인</h2>
-            <p style={{ fontSize: 12, color: "#94a3b8", margin: "0 0 16px" }}>학교 코드와 이름으로 접속</p>
+            <p style={{ fontSize: 12, color: "#94a3b8", margin: "0 0 16px" }}>탐험대 코드와 이름으로 접속</p>
             {msgBox}
             <div style={{ display: "flex", gap: 6, marginBottom: 12 }}>
               {["student", "teacher"].map(r => (
@@ -1638,8 +1638,8 @@ function App() {
           </div>
           {/* Register */}
           <div style={{ ...crd, padding: 24, flex: "1 1 320px" }}>
-            <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 4px" }}>🏫 학교 등록</h2>
-            <p style={{ fontSize: 12, color: "#94a3b8", margin: "0 0 16px" }}>교사가 학교를 등록하고 코드를 받습니다</p>
+            <h2 style={{ fontSize: 20, fontWeight: 700, margin: "0 0 4px" }}>🏫 탐험대 등록</h2>
+            <p style={{ fontSize: 12, color: "#94a3b8", margin: "0 0 16px" }}>선생님이 탐험대를 등록하고 코드를 받습니다</p>
             <input value={schoolForm.schoolName} onChange={e => setSF({ ...schoolForm, schoolName: e.target.value })} placeholder="학교명 (예: 행복초등학교)" style={{ ...inp, marginBottom: 8 }} />
             <input value={schoolForm.teacherName} onChange={e => setSF({ ...schoolForm, teacherName: e.target.value })} onKeyDown={e => { if (e.key === "Enter") createSchool(); }} placeholder="교사 이름 (예: 김선생)" style={{ ...inp, marginBottom: 12 }} />
             <button onClick={createSchool} style={{ ...bPri, width: "100%", background: "linear-gradient(135deg,#3b82f6,#6366f1)" }}>학교 생성하기</button>
